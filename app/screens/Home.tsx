@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import {Product} from '../model/Product';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import {Props as ProductDetailsProps} from './ProductDetails';
 
 type RootStackParamList = {
   Home: undefined;
+  ProductDetails: ProductDetailsProps;
 };
 type HomeScreenProps = StackNavigationProp<RootStackParamList, 'Home'>;
 type HomeScreenRoute = RouteProp<RootStackParamList, 'Home'>;
@@ -25,25 +27,31 @@ type HomeProps = {
 
 function Home({navigation}: HomeProps): React.JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
-  const productItem = ({item}: {item: Product}) => (
-    <TouchableOpacity style={styles.productItem}>
-      <View style={{flexDirection: 'row'}}>
-        <View style={{flexDirection: 'column', flexGrow: 9}}>
-          <Text style={styles.itemTitle}>{item.nombre}</Text>
-          <Text style={styles.itemDetails}>
-            Precio: $ {item.precio.toFixed(2)}
+  const productItem = ({item}: {item: Product}) => {
+    return (
+      <TouchableOpacity
+        style={styles.productItem}
+        onPress={() =>
+          navigation.push('ProductDetails', {productJson: JSON.stringify(item)})
+        }>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'column', flexGrow: 9}}>
+            <Text style={styles.itemTitle}>{item.nombre}</Text>
+            <Text style={styles.itemDetails}>
+              Precio: $ {item.precio.toFixed(2)}
+            </Text>
+          </View>
+          <Text
+            style={[
+              styles.itemBadge,
+              item.currentStock < item.minStock ? styles.itemBadgeError : null,
+            ]}>
+            {item.currentStock}
           </Text>
         </View>
-        <Text
-          style={[
-            styles.itemBadge,
-            item.currentStock < item.minStock ? styles.itemBadgeError : null,
-          ]}>
-          {item.currentStock}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  };
 
   useEffect(() => {
     setProducts([

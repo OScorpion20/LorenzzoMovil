@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import Home from './app/screens/Home';
 import Login from './app/screens/Login';
+import ProductDetails from './app/screens/ProductDetails';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ function App(): React.JSX.Element {
           }}
         />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
