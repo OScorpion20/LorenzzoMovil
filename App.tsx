@@ -3,9 +3,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import Home from './app/screens/Home';
 import Login from './app/screens/Login';
-import ProductDetails from './app/screens/ProductDetails';
+import ProductDetails, {
+  Params as ProductDetailsParams,
+} from './app/screens/ProductDetails';
 
 const Stack = createStackNavigator();
+
+export type RootStackParamList = {
+  Home: undefined;
+  ProductDetails: ProductDetailsParams;
+};
 
 function App(): React.JSX.Element {
   return (

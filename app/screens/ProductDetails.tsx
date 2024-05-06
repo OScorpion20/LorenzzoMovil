@@ -1,29 +1,80 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from '../../App';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {Product} from '../model/Product';
 
-export type Props = {
-  product?: Product;
-  productJson: string;
+export type Params = {
+  product: Product;
 };
 
-function ProductDetails({productJson}: Props): React.JSX.Element {
-  const [product, setProduct] = useState();
+export type Props = {
+  route: RouteProp<RootStackParamList, 'ProductDetails'>;
+  navigation: StackNavigationProp<RootStackParamList, 'ProductDetails'>;
+};
+
+function ProductDetails({route}: Props): React.JSX.Element {
+  const [product, setProduct] = useState<Product>();
   useEffect(() => {
-    console.log(productJson);
-    setProduct(JSON.parse(productJson));
-  }, [productJson]);
+    setProduct(route.params.product);
+  }, [route]);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={style.page}>
       {product && (
         <View>
-          <Text>{product.nombre}</Text>
-          <Text>{product.currentStock}</Text>
-          <Text>{product.precio}</Text>
+          <Text style={style.header}>{product.nombre}</Text>
+          <View style={style.row}>
+            <Text style={[style.text, style.col]}>Existencias:</Text>
+            <Text style={[style.text, style.colAuto]}>
+              <Text
+                style={
+                  product.currentStock < product.minStock
+                    ? style.stockError
+                    : null
+                }>
+                {product.currentStock}
+              </Text>{' '}
+              / {product.maxStock}
+            </Text>
+          </View>
+          <View style={style.row}>
+            <Text style={[style.text, style.col]}>Precio:</Text>
+            <Text style={[style.text, style.colAuto]}>
+              $ {product.precio.toFixed(2)}
+            </Text>
+          </View>
         </View>
       )}
+      <View style={style.row}>
+      
+      </View>
     </SafeAreaView>
   );
 }
+
+const style = StyleSheet.create({
+  page: {
+    margin: 16,
+  },
+  header: {
+    fontSize: 48,
+    color: 'black',
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  col: {
+    flexGrow: 999,
+  },
+  colAuto: {},
+  stockError: {
+    color: 'red',
+  },
+  text: {
+    fontSize: 24,
+  },
+});
 
 export default ProductDetails;
