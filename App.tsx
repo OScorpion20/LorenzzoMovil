@@ -1,25 +1,28 @@
+import React from 'react';
+import {Button} from 'react-native';
 import {
   NavigationContainer,
   NavigationProp,
   useNavigation,
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+
 import Home from './app/screens/Home';
 import Login from './app/screens/Login';
+import ProductAdd from './app/screens/ProductAdd';
 import ProductDetails, {
   Params as ProductDetailsParams,
 } from './app/screens/ProductDetails';
-import ProductAdd from './app/screens/ProductAdd';
-import { Button } from 'react-native';
-
-const Stack = createStackNavigator();
 
 export type RootStackParamList = {
+  Login: undefined;
   Home: undefined;
   ProductDetails: ProductDetailsParams;
   ProductAdd: undefined;
 };
+export type StackNavigation = NavigationProp<RootStackParamList>;
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 function HomeHeader(): React.JSX.Element {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
