@@ -13,12 +13,19 @@ import ProductAdd from './app/screens/ProductAdd';
 import ProductDetails, {
   Params as ProductDetailsParams,
 } from './app/screens/ProductDetails';
+import {
+  EntradasScreen,
+  MovimientosScreenParams,
+  SalidasScreen,
+} from './app/screens/MovimientosScreens';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   ProductDetails: ProductDetailsParams;
   ProductAdd: undefined;
+  EntradasScreen: MovimientosScreenParams;
+  SalidasScreen: MovimientosScreenParams;
 };
 export type StackNavigation = NavigationProp<RootStackParamList>;
 
@@ -52,6 +59,8 @@ function App(): React.JSX.Element {
         />
         <Stack.Screen name="ProductDetails" component={ProductDetails} />
         <Stack.Screen name="ProductAdd" component={ProductAdd} />
+        <Stack.Screen name="EntradasScreen" component={EntradasScreen} />
+        <Stack.Screen name="SalidasScreen" component={SalidasScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
