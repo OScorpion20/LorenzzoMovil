@@ -1,37 +1,65 @@
-import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useState } from 'react';
 import {
   Alert,
-  Button,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
 const styles = StyleSheet.create({
   screen: {
     height: '100%',
-    backgroundColor: '#323844',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#c0c0c040',
     width: '100%',
     padding: 16,
   },
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 24,
+  },
   textInput: {
     borderBottomWidth: 1,
+    borderColor: '#000',
     borderRadius: 8,
     backgroundColor: 'white',
     paddingVertical: 8,
     paddingHorizontal: 12,
     width: '80%',
-    margin: 8,
+    marginVertical: 8,
+  },
+  button: {
+    backgroundColor: '#000',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    marginTop: 16,
+    width: '80%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  rememberMeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  rememberMeText: {
+    marginLeft: 8,
+    fontSize: 16,
   },
 });
 
@@ -43,7 +71,7 @@ type LoginProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
 };
 
-function Login({navigation}: LoginProps): React.JSX.Element {
+function Login({ navigation }: LoginProps): React.JSX.Element {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
 
@@ -54,15 +82,17 @@ function Login({navigation}: LoginProps): React.JSX.Element {
     }
     Alert.alert('Fallido', 'Datos incorrectos');
   };
+
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.container}>
-        <Text>Iniciar sesión</Text>
+        <Text style={styles.title}>LORENZZO</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="Usuario"
+          placeholder="email@dirección.com"
           placeholderTextColor="#828894"
           onChangeText={u => setUsuario(u)}
+          keyboardType="email-address"
         />
         <TextInput
           style={styles.textInput}
@@ -71,7 +101,14 @@ function Login({navigation}: LoginProps): React.JSX.Element {
           secureTextEntry={true}
           onChangeText={p => setContrasena(p)}
         />
-        <Button title="Ingresar" onPress={btnIngresarOnPress} />
+        <TouchableOpacity style={styles.button} onPress={btnIngresarOnPress}>
+          <Text style={styles.buttonText}>Log in</Text>
+        </TouchableOpacity>
+        <View style={styles.rememberMeContainer}>
+          <TouchableOpacity>
+            <Text style={styles.rememberMeText}>Recuerdame!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

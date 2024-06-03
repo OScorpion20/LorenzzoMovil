@@ -1,11 +1,9 @@
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Product} from '../model/Product';
-import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
-import {RootStackParamList} from '../../App';
-import LocalDB from '../persistance/localdb';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useContext, useEffect } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { RootStackParamList } from '../../App';
+import { ProductContext } from '../context/ProductContext';
 
 type HomeScreenProps = StackNavigationProp<RootStackParamList, 'Home'>;
 type HomeScreenRoute = RouteProp<RootStackParamList, 'Home'>;
@@ -15,81 +13,146 @@ type HomeProps = {
   route: HomeScreenRoute;
 };
 
-function Home({navigation}: HomeProps): React.JSX.Element {
-  const [products, setProducts] = useState<Product[]>([]);
-  const productItem = ({item}: {item: Product}) => (
-    <TouchableOpacity
-      style={styles.productItem}
-      onPress={() => navigation.push('ProductDetails', {product: item})}>
-      <View style={{flexDirection: 'row'}}>
-        <View style={{flexDirection: 'column', flexGrow: 9}}>
-          <Text style={styles.itemTitle}>{item.nombre}</Text>
-          <Text style={styles.itemDetails}>
-            Precio: $ {item.precio.toFixed(2)}
-          </Text>
-        </View>
-        <Text
-          style={[
-            styles.itemBadge,
-            item.currentStock < item.minStock ? styles.itemBadgeError : null,
-          ]}>
-          {item.currentStock}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+function Home({ navigation }: HomeProps): React.JSX.Element {
+  const context = useContext(ProductContext);
+
+  if (!context) {
+    return (
+      <SafeAreaView style={styles.screen}>
+        <Text style={styles.errorText}>Error: No se pudo cargar el contexto de productos.</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const { products } = context;
 
   useEffect(() => {
-    LocalDB.init();
-    navigation.addListener('focus', async () => {
-      const db = await LocalDB.connect();
-      db.transaction(async tx => {
-        tx.executeSql(
-          'SELECT * FROM productos',
-          [],
-          (_, res) => setProducts(res.rows.raw()),
-          error => console.error({error}),
-        );
-      });
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Aquí puedes agregar cualquier lógica adicional que necesites cuando la pantalla esté en foco.
     });
+
+    return unsubscribe;
   }, [navigation]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screen}>
+      <Text style={styles.title}>LORENZZO</Text>
+      <View style={styles.navbar}>
+        <TouchableOpacity onPress={() => navigation.navigate('Sneakers')}>
+          <Text style={styles.navbarItem}>Sneakers</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Shirts')}>
+          <Text style={styles.navbarItem}>Shirts</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Jeans')}>
+          <Text style={styles.navbarItem}>Jeans</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Kids')}>
+          <Text style={styles.navbarItem}>Kids</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Discounts')}>
+          <Text style={styles.navbarItem}>%</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.subtitle}>LORENZZO como estilo de vida</Text>
+      <Text style={styles.description}>
+        Las mejores marcas y atención para nuestros clientes en México
+      </Text>
       <FlatList
         data={products}
-        renderItem={productItem}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.productItem}>
+            <Text style={styles.productName}>{item.nombre}</Text>
+            <Text style={styles.productDescription}>{item.descripcion}</Text>
+            <Text style={styles.productPrice}>${item.precio}</Text>
+          </View>
+        )}
+        ListHeaderComponent={
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProductAdd')}>
+            <Text style={styles.buttonText}>AGREGAR PRODUCTOS</Text>
+          </TouchableOpacity>
+        }
       />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  productItem: {
-    padding: 12,
-    borderBottomColor: '#c0c0c0',
-    borderBottomWidth: 1,
+  screen: {
+    flex: 1,
     backgroundColor: 'white',
   },
-  itemTitle: {
-    fontSize: 24,
-    // fontWeight: 'bold',
-    color: 'black',
-    // textTransform: 'uppercase',
-  },
-  itemDetails: {
-    fontSize: 18,
-    opacity: 0.8,
-  },
-  itemBadge: {
-    fontSize: 24,
-    color: '#204080',
+  title: {
+    fontSize: 36,
     fontWeight: 'bold',
-    alignSelf: 'center',
+    marginTop: 24,
+    marginBottom: 16,
+    textAlign: 'center',
   },
-  itemBadgeError: {
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    paddingBottom: 8,
+    marginBottom: 16,
+  },
+  navbarItem: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: 'black',
+  },
+  subtitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 16,
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 24,
+  },
+  productItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    paddingVertical: 8,
+    width: '100%',
+    paddingHorizontal: 16,
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  productDescription: {
+    fontSize: 14,
+    color: '#666',
+  },
+  productPrice: {
+    fontSize: 16,
+    color: '#000',
+  },
+  button: {
+    backgroundColor: '#000',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    alignItems: 'center',
+    margin: 16,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  errorText: {
+    fontSize: 18,
     color: 'red',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 

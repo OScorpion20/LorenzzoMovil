@@ -1,8 +1,7 @@
 export interface Product {
-  id: number;
+  id: string;
   nombre: string;
-  precio: number;
-  minStock: number;
-  currentStock: number;
-  maxStock: number;
+  descripcion: string; // Nombre del producto
+  precio: number; // Precio del producto
+  minStock: number; // Stock mínimo
 }
