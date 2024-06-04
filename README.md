@@ -68,15 +68,15 @@ LorenzzoMovil/
 |---------------------------|----------------------------------------------------------------------------------------------------|
 | [App.tsx](/App.tsx)                 | Archivo principal de la aplicación que configura la navegación y el contexto global.               |
 | [ProductContext.tsx](app/context/ProductContext.tsx)      | Contexto de React que proporciona un estado global para los productos.                             |
-| [localdb.ts](persistance/localdb.ts)             | Módulo que maneja la base de datos local utilizando SQLite.                                        |
-| [Home.tsx](screens/Home.tsx)                | Pantalla principal que muestra los productos disponibles.                                          |
-| [ProductAdd.tsx](screens/ProductAdd.tsx)           | Pantalla para agregar un nuevo producto.                                                           |
-| [ProductDetails.tsx](screens/ProductDetails.tsx)       | Pantalla que muestra los detalles de un producto específico.                                       |
-| [Sneakers.tsx](screens/Sneakers.tsx)             | Pantalla que muestra productos de la categoría Sneakers.                                           |
-| [Shirts.tsx](screens/Shirts.tsx)              | Pantalla que muestra productos de la categoría Shirts.                                             |
-| [Jeans.tsx](screens/Jeans.tsx)                | Pantalla que muestra productos de la categoría Jeans.                                              |
-| [Kids.tsx](screens/Kids.tsx)                 | Pantalla que muestra productos de la categoría Kids.                                               |
-| [Discounts.tsx](screens/Discounts.tsx)            | Pantalla que muestra productos en descuento.                                                       |
+| [localdb.ts](app/persistance/localdb.ts)             | Módulo que maneja la base de datos local utilizando SQLite.                                        |
+| [Home.tsx](app/screens/Home.tsx)                | Pantalla principal que muestra los productos disponibles.                                          |
+| [ProductAdd.tsx](app/screens/ProductAdd.tsx)           | Pantalla para agregar un nuevo producto.                                                           |
+| [ProductDetails.tsx](app/screens/ProductDetails.tsx)       | Pantalla que muestra los detalles de un producto específico.                                       |
+| [Sneakers.tsx](app/screens/Sneakers.tsx)             | Pantalla que muestra productos de la categoría Sneakers.                                           |
+| [Shirts.tsx](app/screens/Shirts.tsx)              | Pantalla que muestra productos de la categoría Shirts.                                             |
+| [Jeans.tsx](app/screens/Jeans.tsx)                | Pantalla que muestra productos de la categoría Jeans.                                              |
+| [Kids.tsx](app/screens/Kids.tsx)                 | Pantalla que muestra productos de la categoría Kids.                                               |
+| [Discounts.tsx](app/screens/Discounts.tsx)            | Pantalla que muestra productos en descuento.                                                       |
 | [Product.ts](app/model/Product.ts)              | Modelo de datos para los productos.                                                                |
 
 ## Uso de la Aplicación
