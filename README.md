@@ -81,12 +81,20 @@ LorenzzoMovil/
 | [Discounts.tsx](app/screens/Discounts.tsx)            | Pantalla que muestra productos en descuento.                                                       |
 | [Product.ts](app/model/Product.ts)              | Modelo de datos para los productos.                                                                |
 
-## Uso de la Aplicación
+## Uso de la Aplicación y navegación de pantallas
 
 1. **Inicio de Sesión**: Al iniciar la aplicación, se mostrará la pantalla de inicio de sesión.
+   ![Captura de pantalla 2024-06-03 215337](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/dfd6fc15-1db5-4a64-9a41-acef3924db3a)
 2. **Pantalla Principal**: Después de iniciar sesión, se mostrará la pantalla principal (`Home`) con una lista de productos.
+   ![Captura de pantalla 2024-06-03 215358](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/1ae51905-cad5-40d5-bcf3-3c46d333e15d)
 3. **Agregar Producto**: Puedes agregar un nuevo producto haciendo clic en el botón "Agregar producto" en el centro de la aplicación.
+   ![Captura de pantalla 2024-06-03 215514](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/51317a14-246b-483a-b631-1897ef955bf1)
 4. **Categorías**: Navega entre las diferentes categorías (Sneakers, Shirts, Jeans, Kids, Discounts) para ver productos específicos.
+   ![Captura de pantalla 2024-06-03 215504](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/5d574612-0081-42d7-beed-81d6e91a22de)
+   ![Captura de pantalla 2024-06-03 215410](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/dfb3edf8-eba2-40ec-8f2b-3e47f8885031)
+   ![Captura de pantalla 2024-06-03 215425](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/5ba3642f-2ea6-4128-86d5-35c406f10df2)
+   ![Captura de pantalla 2024-06-03 215438](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/99d88a7d-788e-400e-8160-cf8675ee3169)
+   ![Captura de pantalla 2024-06-03 215451](https://github.com/OScorpion20/LorenzzoMovil/assets/113185652/1f3a7e02-c9e3-48d7-a890-76f962f60315)
 
 ## Contribuciones
 
