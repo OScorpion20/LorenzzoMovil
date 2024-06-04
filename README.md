@@ -1,8 +1,8 @@
-# LorenzzoMovil
+# Lorenzzo móvil
 
 ## Descripción del Proyecto
 
-LorenzzoMovil es una aplicación móvil desarrollada con React Native que permite gestionar un inventario de productos. La aplicación incluye funcionalidades para agregar, editar, eliminar y visualizar productos, categorizados en diferentes secciones como Sneakers, Shirts, Jeans, Kids, y Discounts. También se conecta a una base de datos local SQLite para almacenar y recuperar datos de productos.
+Lorenzzo móvil es una aplicación móvil desarrollada con React Native que permite gestionar un inventario de productos de una tienda de ropa. La aplicación incluye funcionalidades para agregar, editar, eliminar y visualizar productos, categorizados en diferentes secciones como Sneakers, Shirts, Jeans, Kids, y Discounts. También se conecta a una base de datos local SQLite para almacenar y recuperar datos de productos.
 
 ## Requisitos de Instalación
 
@@ -25,6 +25,8 @@ Para ejecutar este proyecto en tu máquina local, asegúrate de tener instalados
 2. **Instalar Dependencias**:
    ```bash
    npm install
+   npm install react-native-sqlite-storage
+   npx pod-install
    ```
 
 3. **Configurar el Entorno**:
