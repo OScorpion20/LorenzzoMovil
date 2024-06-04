@@ -1,79 +1,97 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# LorenzzoMovil
 
-# Getting Started
+## Descripción del Proyecto
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+LorenzzoMovil es una aplicación móvil desarrollada con React Native que permite gestionar un inventario de productos. La aplicación incluye funcionalidades para agregar, editar, eliminar y visualizar productos, categorizados en diferentes secciones como Sneakers, Shirts, Jeans, Kids, y Discounts. También se conecta a una base de datos local SQLite para almacenar y recuperar datos de productos.
 
-## Step 1: Start the Metro Server
+## Requisitos de Instalación
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Para ejecutar este proyecto en tu máquina local, asegúrate de tener instalados los siguientes requisitos:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- Node.js (https://nodejs.org/)
+- npm (https://www.npmjs.com/)
+- React Native CLI (https://reactnative.dev/docs/environment-setup)
+- Android Studio (https://developer.android.com/studio) (para emular dispositivos Android)
+- Git (https://git-scm.com/)
 
-```bash
-# using npm
-npm start
+## Pasos de Instalación
 
-# OR using Yarn
-yarn start
+1. **Clonar el Repositorio**:
+   ```bash
+   git clone https://github.com/OScorpion20/LorenzzoMovil.git
+   cd LorenzzoMovil
+   ```
+
+2. **Instalar Dependencias**:
+   ```bash
+   npm install
+   ```
+
+3. **Configurar el Entorno**:
+   Asegúrate de tener configurado el entorno de React Native siguiendo las instrucciones oficiales: [React Native Environment Setup](https://reactnative.dev/docs/environment-setup)
+
+4. **Ejecutar la Aplicación**:
+   ```bash
+   npm start 
+   ó
+   npm run android
+   ```
+
+## Estructura del Proyecto
+
+```plaintext
+LorenzzoMovil/
+│
+├── app/
+│   ├── context/
+│   │   └── ProductContext.tsx
+│   ├── persistance/
+│   │   └── localdb.ts
+│   ├── screens/
+│   │   ├── Home.tsx
+│   │   ├── ProductAdd.tsx
+│   │   ├── ProductDetails.tsx
+│   │   ├── Sneakers.tsx
+│   │   ├── Shirts.tsx
+│   │   ├── Jeans.tsx
+│   │   ├── Kids.tsx
+│   │   └── Discounts.tsx
+│   └── model/
+│       └── Product.ts
+│
+└── App.tsx
 ```
 
-## Step 2: Start your Application
+## Descripción de Archivos
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+| Archivo                   | Descripción                                                                                        |
+|---------------------------|----------------------------------------------------------------------------------------------------|
+| [App.tsx](/App.tsx)                 | Archivo principal de la aplicación que configura la navegación y el contexto global.               |
+| [ProductContext.tsx](app/context/ProductContext.tsx)      | Contexto de React que proporciona un estado global para los productos.                             |
+| [localdb.ts](persistance/localdb.ts)             | Módulo que maneja la base de datos local utilizando SQLite.                                        |
+| [Home.tsx](screens/Home.tsx)                | Pantalla principal que muestra los productos disponibles.                                          |
+| [ProductAdd.tsx](screens/ProductAdd.tsx)           | Pantalla para agregar un nuevo producto.                                                           |
+| [ProductDetails.tsx](screens/ProductDetails.tsx)       | Pantalla que muestra los detalles de un producto específico.                                       |
+| [Sneakers.tsx](screens/Sneakers.tsx)             | Pantalla que muestra productos de la categoría Sneakers.                                           |
+| [Shirts.tsx](screens/Shirts.tsx)              | Pantalla que muestra productos de la categoría Shirts.                                             |
+| [Jeans.tsx](screens/Jeans.tsx)                | Pantalla que muestra productos de la categoría Jeans.                                              |
+| [Kids.tsx](screens/Kids.tsx)                 | Pantalla que muestra productos de la categoría Kids.                                               |
+| [Discounts.tsx](screens/Discounts.tsx)            | Pantalla que muestra productos en descuento.                                                       |
+| [Product.ts](app/model/Product.ts)              | Modelo de datos para los productos.                                                                |
 
-### For Android
+## Uso de la Aplicación
 
-```bash
-# using npm
-npm run android
+1. **Inicio de Sesión**: Al iniciar la aplicación, se mostrará la pantalla de inicio de sesión.
+2. **Pantalla Principal**: Después de iniciar sesión, se mostrará la pantalla principal (`Home`) con una lista de productos.
+3. **Agregar Producto**: Puedes agregar un nuevo producto haciendo clic en el botón "Agregar producto" en el centro de la aplicación.
+4. **Categorías**: Navega entre las diferentes categorías (Sneakers, Shirts, Jeans, Kids, Discounts) para ver productos específicos.
 
-# OR using Yarn
-yarn android
-```
+## Contribuciones
 
-### For iOS
+Las contribuciones son bienvenidas. Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva funcionalidad'`).
+4. Empuja tu rama (`git push origin feature/nueva-funcionalidad`).
+5. Crea un Pull Request.
